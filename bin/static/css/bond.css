@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.side-bar {
+  float: left;
+  width: 180px;
+  margin: 0;
+  padding: 0;
+}
+
+.bondButton {
+  width: 100px;
+}
+
+.bondList {
+  float: right;
+  width: 1000px;
+}
+
+div {
+  display: block;
+  width:auto;
+  padding: 2rem;
+  clear: none;
+}
+

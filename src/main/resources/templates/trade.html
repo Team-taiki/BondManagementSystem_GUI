@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link href="/css/base.css" th:href="@{/css/base.css}" rel="stylesheet"></link>
+    <link href="/css/trade.css" th:href="@{/css/trade.css}" rel="stylesheet"></link>
+	<title>Trade Management</title>
+  </head>
+  <body>
+	<header th:replace="fragment/headerfragment :: header"></header>
+      <main>
+      <div class="trademenubox">
+        <p>取引の一覧表示・新規登録・訂正削除を行なう場合は以下より入力して下さい。</p>
+        <form class="trademenu" action="/trade" method="post">
+          <ul class="trademenulist">
+          	<li>
+              <label for="showlist">取引の一覧表示</label>
+              <button class="trademenubtn" id="showlist" type="submit" name="tradelist">LIST</button>
+            </li>
+            <li>
+              <label for="inputtrade">取引の新規登録</label>
+              <button class="trademenubtn" id="inputtrade" type="submit" name="inputtrade">INPUT</button>
+            </li>
+          </ul>
+       </form>
+      </div>
+      <div id="trademenuarea" th:replace="fragment/tradefragment :: ${trademenu}?:usual"></div>
+    </main>
+    <footer>
+     	 フッター
+    </footer>
+    <script src="/script/trade.js" th:src="@{/script/trade.js}"></script>
+  </body>
+</html>

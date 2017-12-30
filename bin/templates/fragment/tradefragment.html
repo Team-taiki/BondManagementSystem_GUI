@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+  	<!--  usual -->
+  	<div th:fragment="usual"></div>
+  	<!-- 取引一覧 -->
+  	<div class="tradelist clearfix" th:fragment="tradelist">
+      <h3 class="tabletitle">取引一覧</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>銘柄コード</th>
+            <th>銘柄名称</th>
+            <th>取引コード</th>
+            <th>取引順序</th>
+            <th>売買</th>
+            <th>取引単位</th>
+            <th>取引価格</th>
+            <th>取引時刻</th>
+            <th>訂正/削除</th>
+          </tr>
+        </thead>
+       <tbody th:remove="all-but-first" th:each="trade:${tradeentitylist}">
+        <form id="listform" action="/trade" method="post">
+         <tr>
+          <td class="bondcode" th:text="${trade.bondcode}">hogehoge</td>
+          <td class="bondname" th:text="${trade.bondname}">hogehoge</td>
+          <td class="tradecode" th:text="${trade.tradecode}">tradecode</td>
+          <td class="tradeorder" th:text="${trade.tradeorder}">hogehoge</td>
+          <td class="buysell" th:text="${trade.buyorsell}">hogehoge</td>
+          <td class="tradeunit" th:text="${trade.executedamount}">hogehoge</td>
+          <td class="tradevalue" th:text="${trade.executedvalue}">hogehoge</td>
+          <td class="tradetime" th:text="${trade.executeddatetime}">hogehoge</td>
+          <td>
+           <button class = "listbtn" type="button" name="updatebtn">UPDATE</button>
+           <button class="listbtn" type="button" name="deletebtn">DELETE</button>
+          </td>
+         </tr>
+        </form>
+       </tbody>
+      </table>
+     </div>
+      <!-- 取引の新規登録 -->
+     <div id="trademenuarea" th:fragment="inputtrade">
+     <p>取引を新規登録します。</p>
+     <form id="inputtradeform" class="inputtrade" action="/trade" method="post">
+      <ul>
+       <li>
+        <label for="bondcode">銘柄コード：</label>
+        <input id="bondcode" type="text" name="bondcode" />
+       </li>
+       <li>
+        <label for="buysell">BUY</label>
+        <input id="buysell" type="radio" name="buysell" value="BUY"/>
+         <label for="buysell">SELL</label>
+         <input id="buysell" type="radio" name="buysell" value="SELL"/>
+        </li>
+        <li>
+         <label for="tradeamount">取引単位：</label>
+         <input id="tradeamount" type="number" step="1" min="0" name="tradeamount" />
+        </li>
+        <li>
+         <label for="tradevalue">取引価格：</label>
+         <input id="tradevalue" type="number" step="0.001" min="0" name="tradevalue" />
+        </li>
+        <li>
+         <label for="tradetime">取引時刻：</label>
+         <input id="tradetime" type="time" step="0.1" min="9:00" max="15:00" name="tradetime" />
+          <button class="trademenubtn" type="submit" name="inputnewtrade">新規登録</button>
+        </li>
+       </ul>
+      </form>
+    </div>
+  	<div th:fragment="updatetrade">
+  	 update:TBD
+  	</div>
+  	<div th:fragment="deletetrade">
+  	 delete:TBD
+  	</div>
+  </body>
+</html>

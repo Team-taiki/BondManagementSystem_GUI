@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <body>
+  	<!-- メニューヘッダー -->
+  	<header th:fragment="header">
+      <h2 class="title">Bond Manegement System</h2>
+      <form class="headerlist" action="/" method="post">
+      	<button class="menubtn" type="submit" name="homebtn">ホーム</button>
+        <button class="menubtn" type="submit" name="tradebtn">取引管理</button>
+        <button class="menubtn" type="submit" name="positionbtn">ポジション表示</button>
+        <button class="menubtn" type="submit" name="marketvbtn">時価管理</button>
+        <button class="menubtn" type="submit" name="closingbtn">締め処理</button>
+        <button class="menubtn" type="submit" name="bondbtn">銘柄管理</button>
+      </form>
+    </header>
+  </body>
+</html>

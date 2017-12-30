@@ -1,0 +1,120 @@
+@charset "UTF-8";
+html {
+  font-size: 62.5%;
+  font-family: "Meiryo";
+}
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  margin: auto;
+  padding: 1rem;
+}
+p {
+  margin: auto;
+  font-weight: bolder;
+  padding: 1rem;
+}
+div {
+  display: block;
+  width:100%;
+  clear: both;
+  padding: 2rem;
+}
+li {
+ margin: 1rem;
+ list-style: none;
+}
+body {
+  font-size: 1.4em;
+  background: #EEFFFF;
+  margin: auto;
+  padding: 0;
+}
+hr {
+  margin: 0;
+}
+header {
+  height:120px;
+  margin: 0;
+  padding: 0;
+  background-color: #BAD3FF;
+}
+
+header .title {
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+main {
+  height:800px;
+  margin:0;
+  padding:0;
+  background-color: rgb(255, 255, 255);
+  position: relative;
+}
+
+footer {
+  height:100px;
+  margin:0px;
+  /*background-color: rgb(123, 104, 238);*/
+}
+/*clearfix用のレイアウト*/
+.clearfix::after {
+  content: '';
+  display: block;
+  clear:both;
+}
+/*メニューボタンのレイアウト*/
+.menubtn {
+  background-color: #ffffff;
+  display: inline-block;
+  width:13rem;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  border-radius: 3px;
+  transition: .4s;
+  margin: 1rem;
+}
+.menubtn:hover {
+  background: #67c5ff;
+  color: white;
+}
+
+/*テーブルのレイアウト*/
+.tabletitle {
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+}
+table {
+  width: 90%;
+  float:left;
+  margin-left: 1rem;
+  border: 1px solid #ccc;
+}
+th {
+  border: none;
+}
+td {
+  border-top: 1px solid #ececec;
+  border-right: 1px solid #ccc;
+  border-bottom: none;
+  border-left: 1px solid #ccc;
+}
+thead tr {
+ color: #ffffff;
+ margin:1rem;
+ border-right: 1px solid #6B97BF;
+ border-bottom: 1px solid #6B97BF;
+ border-left: 1px solid #6B97BF;
+ background-color: #000080;
+}
+
+tbody tr {
+ border-bottom: 1px solid #ccc;
+ background-color: white;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #EEEEEE;
+}
