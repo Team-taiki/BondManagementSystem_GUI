@@ -10,18 +10,14 @@
       <main>
       <div class="trademenubox">
         <p>取引の一覧表示・新規登録・訂正削除を行なう場合は以下より入力して下さい。</p>
-        <form class="trademenu" action="/trade" method="post">
-          <ul class="trademenulist">
-          	<li>
-              <label for="showlist">取引の一覧表示</label>
-              <button class="trademenubtn" id="showlist" type="submit" name="tradelist">LIST</button>
-            </li>
-            <li>
-              <label for="inputtrade">取引の新規登録</label>
-              <button class="trademenubtn" id="inputtrade" type="submit" name="inputtrade">INPUT</button>
-            </li>
-          </ul>
-       </form>
+        <form class="trademenu" action="/trade/list" method="post">
+          <label for="showlist">取引の一覧表示</label>
+          <button class="trademenubtn" id="showlist" type="submit" name="tradelist">LIST</button>
+        </form>
+        <form class="trademenu" action="/trade/input" method="post">
+          <label for="inputtrade">取引の新規登録</label>
+          <button class="trademenubtn" id="inputtrade" type="submit" name="inputtrade">INPUT</button>
+        </form>
       </div>
       <div id="trademenuarea" th:replace="fragment/tradefragment :: ${trademenu}?:usual"></div>
     </main>

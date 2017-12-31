@@ -20,7 +20,7 @@
             <th>訂正/削除</th>
           </tr>
         </thead>
-       <tbody th:remove="all-but-first" th:each="trade:${tradeentitylist}">
+       <tbody th:remove="all-but-first" th:each="trade:${tradeDtoList}">
         <form id="listform" action="/trade" method="post">
          <tr>
           <td class="bondcode" th:text="${trade.bondcode}">hogehoge</td>

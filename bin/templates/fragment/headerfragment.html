@@ -5,12 +5,23 @@
   	<!-- メニューヘッダー -->
   	<header th:fragment="header">
       <h2 class="title">Bond Manegement System</h2>
-      <form class="headerlist" action="/" method="post">
+
+      <form class="headerlist" action="/home" method="post">
       	<button class="menubtn" type="submit" name="homebtn">ホーム</button>
+      </form>
+      <form class="headerlist" action="/trade" method="post">
         <button class="menubtn" type="submit" name="tradebtn">取引管理</button>
+      </form>
+      <form class="headerlist" action="/position" method="post">
         <button class="menubtn" type="submit" name="positionbtn">ポジション表示</button>
+      </form>
+      <form class="headerlist" action="/marketvalue" method="post">
         <button class="menubtn" type="submit" name="marketvbtn">時価管理</button>
+      </form>
+      <form class="headerlist" action="/closing" method="post">
         <button class="menubtn" type="submit" name="closingbtn">締め処理</button>
+      </form>
+      <form class="headerlist" action="/bond" method="post">
         <button class="menubtn" type="submit" name="bondbtn">銘柄管理</button>
       </form>
     </header>

@@ -31,8 +31,11 @@
   text-align: center;
 }
 /*メニューのレイアウト*/
-.trademenubox, .inputtrade {
+.trademenubox {
   width:60rem;
+}
+.trademenu {
+  margin:1rem;
 }
 /*メニューボタンのレイアウト*/
 .trademenubtn {
