@@ -28,4 +28,14 @@ public class TradeController {
 		model.addAttribute("tradeDtoList", tradeService.getTradeList());
 		return "trade";
 	}
+	/** 取引の新規登録画面を表示する
+	 *
+	 * @param model
+	 * @return trade.html
+	 */
+	@RequestMapping(value="/input", params="inputtrade", method=RequestMethod.POST)
+	public String showInputTrade(Model model) {
+		model.addAttribute("trademenu", "inputtrade");
+		return "trade";
+	}
 }
