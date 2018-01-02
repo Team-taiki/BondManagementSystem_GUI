@@ -10,10 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.Data;
 @Entity
 @Table(name="TRADE")
 @Data
+@Builder
 public class TradeEntity {
 
 	@Id
@@ -21,29 +23,29 @@ public class TradeEntity {
 	@Column(name="TRADE_ID")
 	private Integer id;
 	@Column(name="TRADE_CODE")
-	private int tradecode;
+	private int tradeCode;
 	@Column(name="TRADE_ORDER")
-	private int tradeorder;
+	private int tradeOrder;
 	@Column(name="DELETED_FLAG")
-	private int deletedflag;	// exist=0, deleted=1
+	private int deletedFlag;	// exist=0, deleted=1
 	@Column(name="BOND_CODE")
-	private String bondcode;
+	private String bondCode;
 	@Column(name="BOND_NAME")
-	private String bondname;
+	private String bondName;
 	@Column(name="BUY_OR_SELL")
-	private String buyorsell;
+	private String buyOrSell;
 	@Column(name="EXECUTED_AMOUNT")
-	private BigDecimal executedamount;
+	private BigDecimal executedAmount;
 	@Column(name="EXECUTED_VALUE")
-	private BigDecimal executedvalue;
+	private BigDecimal executedValue;
 	@Column(name="EXECUTED_DATETIME")
-	private LocalDateTime executeddatetime;
+	private LocalDateTime executedDateTime;
 	@Column(name="CREATE_USER")
-	private String createuser;
+	private String createUser;
 	@Column(name="MODIFY_USER")
-	private String modifyuser;
+	private String modifyUser;
 	@Column(name="CREATED_TIME")
-	private LocalDateTime createddatetime;
+	private LocalDateTime createdDateTime;
 	@Column(name="MODIFIED_TIME")
-	private LocalDateTime modifieddatetime;
+	private LocalDateTime modifiedDateTime;
 }
