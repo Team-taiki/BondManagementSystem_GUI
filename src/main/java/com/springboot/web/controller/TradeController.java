@@ -1,11 +1,15 @@
 package com.springboot.web.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.springboot.web.dto.TradeDto;
 import com.springboot.web.service.TradeService;
 
 @Controller
@@ -37,5 +41,33 @@ public class TradeController {
 	public String showInputTrade(Model model) {
 		model.addAttribute("trademenu", "inputtrade");
 		return "trade";
+	}
+
+	/** 取引の新規登録を行う
+	 *
+	 * @param model
+	 * @param bondCode
+	 * @param buySell
+	 * @param executedAmount
+	 * @param executedValue
+	 * @param executedTime
+	 */
+	@RequestMapping(value="/trade", params="inputnewtrade", method=RequestMethod.POST)
+	public void insertNewTrade(Model model,
+			@RequestParam("bondcode")String bondCode,
+			@RequestParam("buysell")String buySell,
+			@RequestParam("tradeamount")int executedAmount,
+			@RequestParam("tradevalue")double executedValue,
+			@RequestParam("tradetime")String executedTime) {
+		// TradeDtoに変換する
+		TradeDto tradeDto = TradeDto.builder()
+				.bondCode(bondCode)
+				.buyOrSell(buySell)
+				.executedAmount(new BigDecimal(executedAmount))
+				.executedValue(new BigDecimal(executedValue))
+				.executedDateTime(tradeService.createDatetime(executedTime))
+				.build();
+		// DBにinsertする
+		tradeService.insertnewTrade(tradeDto);
 	}
 }
