@@ -52,7 +52,7 @@ public class TradeController {
 	 * @param executedValue
 	 * @param executedTime
 	 */
-	@RequestMapping(value="/trade", params="inputnewtrade", method=RequestMethod.POST)
+	@RequestMapping(value="/input", params="inputnewtrade", method=RequestMethod.POST)
 	public void insertNewTrade(Model model,
 			@RequestParam("bondcode")String bondCode,
 			@RequestParam("buysell")String buySell,
@@ -69,5 +69,27 @@ public class TradeController {
 				.build();
 		// DBにinsertする
 		tradeService.insertnewTrade(tradeDto);
+	}
+
+	/** 取引の訂正画面を表示する
+	 *
+	 * @param model
+	 * @return trade.html
+	 */
+	@RequestMapping(value="/update", params="updatetrade", method=RequestMethod.POST)
+	public String showUpdateTrade(Model model) {
+		model.addAttribute("trademenu", "updatetrade");
+		return "trade";
+	}
+
+	/** 取引の削除画面を表示する
+	 *
+	 * @param model
+	 * @return trade.html
+	 */
+	@RequestMapping(value="/delete", params="deletetrade", method=RequestMethod.POST)
+	public String showDeleteTrade(Model model) {
+		model.addAttribute("trademenu", "deletetrade");
+		return "trade";
 	}
 }
