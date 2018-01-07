@@ -54,11 +54,11 @@ public class TradeController {
 	 */
 	@RequestMapping(value="/input", params="inputnewtrade", method=RequestMethod.POST)
 	public void insertNewTrade(Model model,
-			@RequestParam("bondcode")String bondCode,
-			@RequestParam("buysell")String buySell,
-			@RequestParam("tradeamount")int executedAmount,
-			@RequestParam("tradevalue")double executedValue,
-			@RequestParam("tradetime")String executedTime) {
+			@RequestParam("bondcode") String bondCode,
+			@RequestParam("buysell") String buySell,
+			@RequestParam("tradeamount") int executedAmount,
+			@RequestParam("tradevalue") double executedValue,
+			@RequestParam("tradetime") String executedTime) {
 		// TradeDtoに変換する
 		TradeDto tradeDto = TradeDto.builder()
 				.bondCode(bondCode)

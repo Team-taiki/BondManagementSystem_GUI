@@ -11,8 +11,8 @@ public interface BondEntityRepository extends JpaRepository<BondEntity, Integer>
 
 	/** 銘柄コードでBondEntityを検索するメソッド
 	 *
-	 * @param find 銘柄コード
+	 * @param bondCode 銘柄コード
 	 * @return List<BondEntity>
 	 */
-	List<BondEntity> findByBondCode(String find);
+	public List<BondEntity> findByBondCode(String bondCode);
 }

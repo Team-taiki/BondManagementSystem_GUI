@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springboot.web.dto.TradeDto;
+import com.springboot.web.entity.BondEntity;
 import com.springboot.web.entity.TradeEntity;
 import com.springboot.web.repository.BondEntityRepository;
 import com.springboot.web.repository.TradeEntityRepository;
@@ -26,29 +27,29 @@ public class TradeService {
 
 	/** 変更可能な取引の一覧を取得する
 	 *   RepositoryからList<TradeEntity>を取得し、List<TradeDto>に変換しreturn
-	 * @return　List<TradeDto>
+	 * @return List<TradeDto>
 	 */
 	public List<TradeDto> getTradeList() {
 		return tradeEntityRepository.findAll().stream()	// DBよりtradeEntityのリストを取得する
 				.filter(entity -> entity.getDeletedFlag() == 0)	// DeletedFlag==0(exist)のみを取得
-				.map(entity -> new TradeDto(	// TradeEntity -> TradeDtoに変換
-						entity.getBondCode(),
-						entity.getBondName(),
-						entity.getTradeCode(),
-						entity.getTradeOrder(),
-						entity.getBuyOrSell(),
-						entity.getExecutedAmount(),
-						entity.getExecutedValue(),
-						entity.getExecutedDateTime()))
+				.map(entity ->  TradeDto.builder()	// TradeEntity -> TradeDtoに変換
+						.bondCode(entity.getBondCode())
+						.bondName(entity.getBondName())
+						.tradeCode(entity.getTradeCode())
+						.tradeOrder(entity.getTradeOrder())
+						.buyOrSell(entity.getBuyOrSell())
+						.executedAmount(entity.getExecutedAmount())
+						.executedValue(entity.getExecutedValue())
+						.executedDateTime(entity.getExecutedDateTime())
+						.build())
 				.collect(Collectors.toList());
 	}
 
 	@Transactional
 	public void insertnewTrade(TradeDto tradeDto) {
 		// TradeDtoからTradeEntityを作成する
-		TradeEntity tradeEntity = this.transferTradeEntityfromTradeDto(tradeDto);
 		// tradeEntityをinsert
-		tradeEntityRepository.saveAndFlush(tradeEntity);
+		tradeEntityRepository.saveAndFlush(this.transferTradeEntityfromTradeDto(tradeDto));
 	}
 	/** TradeDtoよりTradeEntityへ変換する(新規登録のとき)
 	 *
@@ -56,22 +57,22 @@ public class TradeService {
 	 * @return
 	 */
 	private TradeEntity transferTradeEntityfromTradeDto(TradeDto tradeDto) {
+		TradeEntity tradeEntity = new TradeEntity();
 		int newTradeCode = this.calcNewTradeCode();
-		return TradeEntity.builder()
-				.tradeCode(newTradeCode)
-				.tradeOrder(newTradeCode)
-				.deletedFlag(0)	// exist
-				.bondCode(tradeDto.getBondCode())
-				.bondName(this.findBondName(tradeDto.getBondCode()))
-				.buyOrSell(tradeDto.getBuyOrSell())
-				.executedAmount(tradeDto.getExecutedAmount())
-				.executedValue(tradeDto.getExecutedValue())
-				.executedDateTime(tradeDto.getExecutedDateTime())
-				.createUser(USER)
-				.modifyUser(USER)
-				.createdDateTime(LocalDateTime.now())
-				.modifiedDateTime(LocalDateTime.now())
-				.build();
+		tradeEntity.setTradeCode(newTradeCode);
+		tradeEntity.setTradeOrder(newTradeCode);
+		tradeEntity.setDeletedFlag(0);
+		tradeEntity.setBondCode(tradeDto.getBondCode());
+		tradeEntity.setBondName(this.findBondName(tradeDto.getBondCode()));
+		tradeEntity.setBuyOrSell(tradeDto.getBuyOrSell());
+		tradeEntity.setExecutedAmount(tradeDto.getExecutedAmount());
+		tradeEntity.setExecutedValue(tradeDto.getExecutedValue());
+		tradeEntity.setExecutedDateTime(tradeDto.getExecutedDateTime());
+		tradeEntity.setCreateUser(USER);
+		tradeEntity.setModifyUser(USER);
+		tradeEntity.setCreatedDateTime(LocalDateTime.now());
+		tradeEntity.setModifiedDateTime(LocalDateTime.now());
+		return tradeEntity;
 	}
 
 	/** TradeCodeの最大値+1を返す
@@ -81,7 +82,7 @@ public class TradeService {
 	private int calcNewTradeCode() {
 		List<TradeDto> tradeDtoList = this.getTradeList();
 		if(tradeDtoList.size()==0) {
-			return 0;
+			return 1;
 		}
 		else {
 			// 最大値を取得し最大値+1をリターン
@@ -92,29 +93,35 @@ public class TradeService {
 	}
 
 	/** 銘柄コードで銘柄名称を検索し、銘柄名称を返すメソッド
-	 *
-	 * @param bondcode
+	 * @param bondCode
 	 * @return
 	 */
-	private String findBondName(String bondcode) {
-		return bondEntityRepository.findByBondCode(bondcode).stream()
+	private String findBondName(String bondCode) {
+		List<BondEntity> bondEntityList = bondEntityRepository.findByBondCode(bondCode);
+		if(bondEntityList.size()==0) {
+			return null;
+		}
+		return bondEntityList.stream()
 				.filter(entity -> entity.getDeletedFlag()==1)
 				.collect(Collectors.toList()).get(0).getBondName();
 	}
 
 	/** 取引時刻を取引日時に変換する
 	 * TODO:取引日をシステム日付に変更する
-	 * @param executedtime HH:mm:SSS
+	 * @param executedTime HH:mm:ss.SSS
 	 * @return LocalDateTime
 	 */
-	public LocalDateTime createDatetime(String executedtime) {
-		String[] splitedtime = executedtime.split(":");
-		String[] splitedsecond = splitedtime[2].split("\\.");
+	public LocalDateTime createDatetime(String executedTime) {
+		String[] splitedTime = executedTime.split(":");
+		String[] splitedSecond = {"00", "000"};
+		if(splitedTime.length==3) {
+			splitedSecond = splitedTime[2].split("\\.");
+		}
 		return LocalDateTime.now()
-				.withHour(Integer.parseInt(splitedtime[0]))
-				.withMinute(Integer.parseInt(splitedtime[1]))
-				.withSecond(Integer.parseInt(splitedsecond[0]))
-				.withNano(Integer.parseInt(splitedsecond[1]));
+				.withHour(Integer.parseInt(splitedTime[0]))
+				.withMinute(Integer.parseInt(splitedTime[1]))
+				.withSecond(Integer.parseInt(splitedSecond[0]))
+				.withNano(Integer.parseInt(splitedSecond[1]));
 	}
 
 }

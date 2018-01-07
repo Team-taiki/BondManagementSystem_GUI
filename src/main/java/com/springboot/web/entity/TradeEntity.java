@@ -1,5 +1,6 @@
 package com.springboot.web.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -10,13 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 @Entity
 @Table(name="TRADE")
 @Data
-@Builder
-public class TradeEntity {
+@NoArgsConstructor
+public class TradeEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

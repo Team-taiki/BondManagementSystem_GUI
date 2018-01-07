@@ -1,14 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
   console.log("load trade.js");
-  // 新規登録ボタンが押された時にバリデーションを実施し、確認ダイアログを表示する
-  // confirmInputTrade();
+  inputTradeForm = document.getElementById('inputtradeform');
+  if(inputTradeForm!=null) {
+    // 新規登録ボタンが押された時にバリデーションを実施し、確認ダイアログを表示する
+    confirmInputTrade(inputTradeForm);
+  }
   // 取引の訂正ボタンが押されたとき
   sendUpdateRecord();
 }, false);
 
 // 取引の新規登録メソッド
-var confirmInputTrade = function() {
-  document.getElementById('inputtradeform').addEventListener('submit', function(e) {
+var confirmInputTrade = function(inputTradeForm) {
+  inputTradeForm.addEventListener('submit', function(e) {
     var bondcode = document.getElementById('bondcode').value;
     var buysell = document.getElementById('buysell').value;
     var tradeamount = document.getElementById('tradeamount').value;
@@ -27,7 +30,7 @@ var confirmInputTrade = function() {
       console.log(message);
       // 確認ダイアログを表示する
       if(window.confirm(message)){
-        winsow.alert('Complete input new Trade!')
+        window.alert('Complete input new Trade!')
         console.log('Sent new TRADE to Server.');
       } else {
         // 確認画面でfalseだったらサーバーに送信しない
