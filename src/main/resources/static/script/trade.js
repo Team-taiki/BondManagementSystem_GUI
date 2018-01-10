@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
 // 取引の新規登録メソッド
 var confirmInputTrade = function(inputTradeForm) {
   inputTradeForm.addEventListener('submit', function(e) {
-    var bondcode = document.getElementById('bondcode').value;
-    var buysell = document.getElementById('buysell').value;
-    var tradeamount = document.getElementById('tradeamount').value;
-    var tradevalue = document.getElementById('tradevalue').value;
-    var tradetime = document.getElementById('tradetime').value;
+    var bondcode = document.getElementById('bondCode').value;
+    var buysell = document.getElementById('buySell').value;
+    var tradeamount = document.getElementById('tradeAmount').value;
+    var tradevalue = document.getElementById('tradeValue').value;
+    var tradetime = document.getElementById('tradeTime').value;
 
     // 新規入力のボタンが押された時に未入力の項目が無いかのバリデーション
     var blankFlag = inputValidate(bondcode, buysell, tradeamount, tradevalue, tradetime);
@@ -24,7 +24,7 @@ var confirmInputTrade = function(inputTradeForm) {
       // 空欄があったら警告し、サーバーに送信しない
       e.preventDefault();
       window.alert('Filled All Blank.');
-    } else{
+    } else {
       // 確認メッセージを作成する
       var message = createInputTradeConfirmMessage(bondcode, buysell, tradeamount, tradevalue, tradetime);
       console.log(message);
@@ -45,33 +45,36 @@ var confirmInputTrade = function(inputTradeForm) {
 
 // 空欄が無いかのバリデーション
 var inputValidate = function(bondcode, buysell, tradeamount, tradevalue, tradetime) {
-  if(bondcode==''){
+  if (bondcode=='') {
     return false;
-  } else if(buysell==''){
+  } else if (buysell=='') {
     return false;
-  } else if(tradeamount==''){
+  } else if (tradeamount=='') {
     return false;
-  } else if(tradevalue==''){
+  } else if (tradevalue=='') {
     return false;
-  } else if(tradetime==''){
+  } else if (tradetime=='') {
     return false;
-  }else {
+  } else {
     return true;
   }
 }
 
 // tradeの新規登録時の確認メッセージを作成する
 var createInputTradeConfirmMessage = function(bondcode, buysell, tradeamount, tradevalue, tradetime) {
-  var message = '以下の取引を登録します。よろしいですか。\n銘柄名称:' + bondcode
-  + '\n売買:' + buysell + '\n取引数量:' + tradeamount + '\n取引価格:'
-  +  tradevalue + '\n取引時刻:' + tradetime;
+  var message = '以下の取引を登録します。よろしいですか。'
+	 + '\n銘柄名称:' + bondcode
+	 + '\n売買:' + buysell
+	 + '\n取引数量:' + tradeamount
+	 + '\n取引価格:' +  tradevalue
+	 + '\n取引時刻:' + tradetime;
   return message;
 }
 
 // UPDATEボタンが押下されたときにサーバーに一覧の対象の取引の取引コードを送信する
 var sendUpdateRecord = function() {
   // すべてのUPDATEボタンにイベントリスナーを設定
-  var updatebtn = document.getElementsByName('updatebtn');
+  var updatebtn = document.getElementsByName('updatetrade');
   for(var i=0, l=updatebtn.length;i<l;i++){
     updatebtn.item(i).addEventListener('click', function(e) {
       // UPDATEボタンが押されたカラムを取得
@@ -79,8 +82,9 @@ var sendUpdateRecord = function() {
       // tradecodeを取得
       var tradecodeElement = column.firstElementChild.nextElementSibling.nextElementSibling;
       //　サーバーにtradecodeを送信する
-      document.getElementById('listform').name = tradecodeElement.textContent;
-      document.getElementById('listform').submit();
+      document.getElementById('listform').value = tradecodeElement.textContent;
+      console.log(document.getElementById('listform').value);
+       document.getElementById('listform').submit();
     }, false);
   }
 };

@@ -1,5 +1,6 @@
 package com.springboot.web.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
@@ -67,6 +68,7 @@ public class TradeService {
 		tradeEntity.setBuyOrSell(tradeDto.getBuyOrSell());
 		tradeEntity.setExecutedAmount(tradeDto.getExecutedAmount());
 		tradeEntity.setExecutedValue(tradeDto.getExecutedValue());
+		tradeEntity.setExecutedDate(LocalDate.now());
 		tradeEntity.setExecutedDateTime(tradeDto.getExecutedDateTime());
 		tradeEntity.setCreateUser(USER);
 		tradeEntity.setModifyUser(USER);
@@ -102,8 +104,9 @@ public class TradeService {
 			return null;
 		}
 		return bondEntityList.stream()
-				.filter(entity -> entity.getDeletedFlag()==1)
-				.collect(Collectors.toList()).get(0).getBondName();
+				.filter(entity -> entity.getDeletedFlag()==0)
+				.collect(Collectors.toList()).get(0)
+				.getBondName();
 	}
 
 	/** 取引時刻を取引日時に変換する

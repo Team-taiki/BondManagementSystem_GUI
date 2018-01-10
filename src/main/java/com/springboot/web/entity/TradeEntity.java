@@ -2,6 +2,7 @@ package com.springboot.web.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -39,6 +40,8 @@ public class TradeEntity implements Serializable {
 	private BigDecimal executedAmount;
 	@Column(name="EXECUTED_VALUE")
 	private BigDecimal executedValue;
+	@Column(name="EXECUTED_DATE")
+	private LocalDate executedDate;
 	@Column(name="EXECUTED_DATETIME")
 	private LocalDateTime executedDateTime;
 	@Column(name="CREATE_USER")

@@ -21,19 +21,19 @@
           </tr>
         </thead>
        <tbody th:remove="all-but-first" th:each="trade:${tradeDtoList}">
-        <form id="listform" action="/trade" method="post">
+        <form id="listform" action="/trade/list" method="post">
          <tr>
-          <td class="bondcode" th:text="${trade.bondcode}">hogehoge</td>
-          <td class="bondname" th:text="${trade.bondname}">hogehoge</td>
-          <td class="tradecode" th:text="${trade.tradecode}">tradecode</td>
-          <td class="tradeorder" th:text="${trade.tradeorder}">hogehoge</td>
-          <td class="buysell" th:text="${trade.buyorsell}">hogehoge</td>
-          <td class="tradeunit" th:text="${trade.executedamount}">hogehoge</td>
-          <td class="tradevalue" th:text="${trade.executedvalue}">hogehoge</td>
-          <td class="tradetime" th:text="${trade.executeddatetime}">hogehoge</td>
+          <td class="bondcode" th:text="${trade.bondCode}">hogehoge</td>
+          <td class="bondname" th:text="${trade.bondName}">hogehoge</td>
+          <td class="tradecode" th:text="${trade.tradeCode}">tradecode</td>
+          <td class="tradeorder" th:text="${trade.tradeOrder}">hogehoge</td>
+          <td class="buysell" th:text="${trade.buyOrSell}">hogehoge</td>
+          <td class="tradeunit" th:text="${trade.executedAmount}">hogehoge</td>
+          <td class="tradevalue" th:text="${trade.executedValue}">hogehoge</td>
+          <td class="tradetime" th:text="${trade.executedDateTime}">hogehoge</td>
           <td>
-           <button class = "listbtn" type="button" name="updatebtn">UPDATE</button>
-           <button class="listbtn" type="button" name="deletebtn">DELETE</button>
+           <button class = "listbtn" type="button" name="updateTrade">UPDATE</button>
+           <button class="listbtn" type="button" name="deleteTrade">DELETE</button>
           </td>
          </tr>
         </form>
@@ -46,26 +46,26 @@
      <form id="inputtradeform" class="inputtrade" action="/trade/input" method="post">
       <ul>
        <li>
-        <label for="bondcode">銘柄コード：</label>
-        <input id="bondcode" type="text" name="bondcode" />
+        <label for="bondCode">銘柄コード：</label>
+        <input id="bondCode" type="text" name="bondCode" />
        </li>
        <li>
-        <label for="buysell">BUY</label>
-        <input id="buysell" type="radio" name="buysell" value="BUY"/>
-         <label for="buysell">SELL</label>
-         <input id="buysell" type="radio" name="buysell" value="SELL"/>
+        <label for="buySell">BUY</label>
+        <input id="buySell" type="radio" name="buySell" value="BUY" />
+         <label for="buySell">SELL</label>
+         <input id="buySell" type="radio" name="buySell" value="SELL"   />
         </li>
         <li>
-         <label for="tradeamount">取引単位：</label>
-         <input id="tradeamount" type="number" step="1" min="0" name="tradeamount" />
+         <label for="tradeAmount">取引単位：</label>
+         <input id="tradeAmount" type="number" step="1" min="0" name="tradeAmount" />
         </li>
         <li>
-         <label for="tradevalue">取引価格：</label>
-         <input id="tradevalue" type="number" step="0.001" min="0" name="tradevalue" />
+         <label for="tradeValue">取引価格：</label>
+         <input id="tradeValue" type="number" step="0.001" min="0" name="tradeValue" />
         </li>
         <li>
-         <label for="tradetime">取引時刻：</label>
-         <input id="tradetime" type="time" step="0.1" min="9:00" max="15:00" name="tradetime" />
+         <label for="tradeTime">取引時刻：</label>
+         <input id="tradeTime" type="time" step="0.001" min="9:00" max="15:00" name="tradeTime" />
           <button class="trademenubtn" type="submit" name="inputnewtrade">新規登録</button>
         </li>
        </ul>
